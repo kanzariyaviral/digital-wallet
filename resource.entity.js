@@ -7,7 +7,7 @@ const resource = mongoose.Schema({
   password: { type: String, required: true },
   status: {type: Boolean,default: false},
   hasUserChangedInitialPWD:{type: Boolean,default: false},
-  insertedAt:{type: Date},
+  insertedAt:{type:te},
   insertedBy:{type:String},
   loggedinDatetime:{type:Date},
   role:{type:String,require:true},
