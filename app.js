@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const { DB, PORT } = require("./config/config");
 const port = PORT || 5000;
-const Resource = require("./resource.entity");
+const Resource = require("./entity/resource.entity");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
