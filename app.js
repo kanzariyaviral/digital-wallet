@@ -8,8 +8,10 @@ const Resource = require("./resource.entity");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-mongoose.connect(DB);
-console.log("connected to database");
+mongoose.connect(DB)
+.then(()=>{
+  console.log("connected to database");
+})
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
