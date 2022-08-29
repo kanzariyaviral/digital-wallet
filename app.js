@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const { DB, PORT } = require("./config/config");
 const port = PORT || 5000;
 const Resource = require("./resource.entity");
-const { fail } = require("assert");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -58,7 +57,7 @@ app.post("/resource/create", (req, res) => {
       })
       .catch((e) => {
         return res.status(400).json({
-          success: fail,
+          success: false,
           message: e,
         });
       });
@@ -70,6 +69,7 @@ app.post("/resource/login", (req, res) => {
     .then((resource) => {
       if (resource && resource.password === req.body.password) {
         return res.status(200).json({
+          success:true,
           data: resource,
         });
       }
