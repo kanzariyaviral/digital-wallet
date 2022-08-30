@@ -8,15 +8,14 @@ const Resource = require("./entity/resource.entity");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-mongoose.connect(DB)
-.then(()=>{
+mongoose.connect(DB).then(() => {
   console.log("connected to database");
-})
+});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
-    "Access-Control-Allow-Headers",  
+    "Access-Control-Allow-Headers",
     "Origin,X-Requested-With,Content-Type,Accept,Authorization"
   );
 
@@ -44,9 +43,9 @@ app.post("/resource/create", (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
-      insertedAt:new Date(),
-      insertedBy:'kashyap patel',
-      role:'user',
+      insertedAt: new Date(),
+      insertedBy: "kashyap patel",
+      role: "user",
     });
     resource
       .save()
@@ -71,7 +70,7 @@ app.post("/resource/login", (req, res) => {
     .then((resource) => {
       if (resource && resource.password === req.body.password) {
         return res.status(200).json({
-          success:true,
+          success: true,
           data: resource,
         });
       }
@@ -93,6 +92,18 @@ app.get("/resource", (req, res) => {
     .catch((err) => {
       return res.status(500).json({
         error: err,
+      });
+    });
+});
+app.get("/resource/by/:id", (req, res) => {
+  Resource.findOne({ _id: req.params.id })
+    .then((resource) => {
+      return res.status(200).json({ success: true, data: resource });
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        success: false,
+        data: err,
       });
     });
 });
