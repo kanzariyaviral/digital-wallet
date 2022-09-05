@@ -1,5 +1,6 @@
 const Resource = require("../entity/resource.entity");
 const mongoose = require("mongoose");
+const logger=require('../logger')
 
 exports.createResource=(req, res) => {
     Resource.find({ email: req.body.email }).then((user) => {
@@ -67,9 +68,12 @@ exports.getAllResource=(req, res) => {
       });
   }
 exports.getResourceByID=(req, res) => {
+  let reqData=requestData(req)
+  logger.info(`${JSON. stringify(reqData)}`);
     Resource.findOne({ _id: req.params.id })
       .then((resource) => {
         return res.status(200).json({ success: true, data: resource });
+
       })
       .catch((err) => {
         return res.status(500).json({
@@ -77,4 +81,13 @@ exports.getResourceByID=(req, res) => {
           data: err,
         });
       });
+  }
+  function requestData(req){
+    return{
+      "id":req.body?.id,
+      "url":req.originalUrl,
+      "method":req.method,
+      "body":req.body,
+  
+    }
   }
