@@ -6,7 +6,7 @@ const logConfiguration = {
             format:format.combine(
                 format.timestamp({format: 'MMM-DD-YYYY HH:mm:ss'}),
                 format.align(),
-                format.printf(info => `${info.level}: ${[info.timestamp]}: RequestData : ${info.message}`),
+                format.printf(info => `${info.level}: ${[info.timestamp]}: Data : ${info.message}`),
             )
         })
         
