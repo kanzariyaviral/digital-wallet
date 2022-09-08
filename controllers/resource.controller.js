@@ -73,7 +73,7 @@ exports.getResourceByID = (req, res) => {
   Resource.findOne({ _id: req.params.id })
     .then((resource) => {
       let resp = {
-        id: req?.body?.id || "",
+        trackId: req?.body?.trackId || "",
         success: true,
         data: resource,
       };
@@ -82,7 +82,7 @@ exports.getResourceByID = (req, res) => {
     })
     .catch((err) => {
       const error = {
-        id: req.body?.id,
+        trackId: req.body?.trackId,
         errorMessage: 'Resource Not Found',
       };
       logger.error(`${JSON.stringify(error)}`);
@@ -94,7 +94,7 @@ exports.getResourceByID = (req, res) => {
 };
 function requestData(req) {
   return {
-    id: req.body?.id,
+    trackId: req.body?.trackId,
     url: req?.originalUrl || "",
     method: req.method || "",
     body: req.body || "",
